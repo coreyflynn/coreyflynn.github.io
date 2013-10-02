@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Open Source by Corey Flynn</title>
+  <meta name="author" content="Corey Flynn">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Pacifico:400' rel='stylesheet' type='text/css'>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="jquery.onepage-scroll.js"></script>
+  <link href='onepage-scroll.css' rel='stylesheet' type='text/css'>
+  <link href='page-styles.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div class="wrapper">
+    <div id="target" class="main">
+      
+    </div>
+    <a class="back" href="https://github.com/coreyflynn?tab=repositories">Open Source Projects by Corey Flynn</a>
+  </div>
+
+  <script id="tmpl-repo" type="text/template">
+    <% for (var i = 0; i < repos.length; i++) { %>
+      <% var repo = repos[i]; %>
+      <section class="page1">
+        <div class="page_container">
+          <h1><%= repo.name %></h1>
+          <h2><%= repo.description %></h2>
+          <div class="btns">
+            <a class="reload btn" href=<%= repo.html_url %>>Download on Github</a>
+          </div>
+        </div>
+      </section>
+    <% } %>
+  </script>
+  <script src="Underscore.js"></script>
+  <script type="text/javascript">
+  // get a listing of the current available repos and build a section for each
+  $.getJSON("https://api.github.com/users/coreyflynn/repos",function(repos){
+      // Get the template's markup...
+      var tmplMarkup = $('#tmpl-repo').html();
+      // ...tell Underscore to render the template...
+      var compiledTmpl = _.template(tmplMarkup, { repos : repos });
+      // ...and update part of your page:
+      $('#target').html(compiledTmpl);
+      $(".main").onepage_scroll({
+        sectionContainer: "section"
+      });
+    
+  });
+
+  </script>
+</body>
+</html>
