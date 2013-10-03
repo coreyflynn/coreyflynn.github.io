@@ -44,7 +44,7 @@
     $.getJSON("http://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=e4cc1a48745956f2ee32a816813f7dc9&format=json&nojsoncallback=1",function(res){
       console.log(res);
       res.photos.photo.forEach(function(photo){
-        photo_urls.push('http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg');
+        photo_urls.push('http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_s.jpg');
         get_repos_and_render();
       })
     });
