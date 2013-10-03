@@ -22,6 +22,7 @@
   <script id="tmpl-repo" type="text/template">
     <% for (var i = 0; i < repos.length; i++) { %>
       <% var repo = repos[i]; %>
+      <% var url = _.shuffle(photo_urls)[0] %>
       <section class="page1">
         <div class="page_container">
           <h1><%= repo.name %></h1>
@@ -30,25 +31,41 @@
             <a class="reload btn" href=<%= repo.html_url %>>Download on Github</a>
           </div>
         </div>
+
+        <div  style="background-image: url(<%= url %>); background-size:100%; height: 100%; width: 100%; -webkit-filter: blur(20px)">
+        <div style="background-color:rgba(173, 216, 230, 0.5); height: 100%; width: 100%, opacity:0.5">
       </section>
     <% } %>
   </script>
   <script src="Underscore.js"></script>
   <script type="text/javascript">
-  // get a listing of the current available repos and build a section for each
-  $.getJSON("https://api.github.com/users/coreyflynn/repos",function(repos){
-      // Get the template's markup...
-      var tmplMarkup = $('#tmpl-repo').html();
-      // ...tell Underscore to render the template...
-      var compiledTmpl = _.template(tmplMarkup, { repos : repos });
-      // ...and update part of your page:
-      $('#target').html(compiledTmpl);
-      $(".main").onepage_scroll({
-        sectionContainer: "section"
-      });
-    
-  });
+  var photo_urls = [];
+  function get_flickr(){
+    $.getJSON("http://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=e4cc1a48745956f2ee32a816813f7dc9&format=json&nojsoncallback=1",function(res){
+      console.log(res);
+      res.photos.photo.forEach(function(photo){
+        photo_urls.push('http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg');
+        get_repos_and_render();
+      })
+    });
+  }
+  
+  function get_repos_and_render(){
+    // get a listing of the current available repos and build a section for each
+    $.getJSON("https://api.github.com/users/coreyflynn/repos",function(repos){
+        // Get the template's markup...
+        var tmplMarkup = $('#tmpl-repo').html();
+        // ...tell Underscore to render the template...
+        var compiledTmpl = _.template(tmplMarkup, { repos : repos });
+        // ...and update part of your page:
+        $('#target').html(compiledTmpl);
+        $(".main").onepage_scroll({
+          sectionContainer: "section"
+        });
+    });
+  }
 
+  get_flickr();
   </script>
 </body>
 </html>
