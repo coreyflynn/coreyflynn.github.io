@@ -197,6 +197,16 @@ html {
       -o-transition: all 500ms ease-in-out;
       transition: all 500ms ease-in-out;
     }
+
+    .bg_image{
+      position: absolute;
+      top: 0;
+      left: 0;
+      text-align: center;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .back:hover {
       color: black;
       background: rgba(255, 255, 255, 0.5);
@@ -225,6 +235,7 @@ html {
     
     .main section.page1 {
       background:rgb(230, 217, 200);
+      opacity: 0.5;
     }
     .main section.page1 h1 {
       text-align: left;
