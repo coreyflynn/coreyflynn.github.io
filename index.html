@@ -1,73 +1,17 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Open Source by Corey Flynn</title>
-  <meta name="author" content="Corey Flynn">
-  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700' rel='stylesheet' type='text/css'>
-  <link href='http://fonts.googleapis.com/css?family=Pacifico:400' rel='stylesheet' type='text/css'>
-  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script type="text/javascript" src="jquery.onepage-scroll.js"></script>
-  <link href='onepage-scroll.css' rel='stylesheet' type='text/css'>
-  <link href='page-styles.css' rel='stylesheet' type='text/css'>
-</head>
-<body>
-  <div class="wrapper">
-    <div  class="bg_image" style="background-size:100%; height: 100%; width: 100%; -webkit-filter: blur(20px)"></div>
-    <div id="target" class="main">
-      
-    </div>
-    <a class="back" href="https://github.com/coreyflynn?tab=repositories">Open Source Projects by Corey Flynn</a>
-    
-  </div>
 
-  <script id="tmpl-repo" type="text/template">
-    <% for (var i = 0; i < repos.length; i++) { %>
-      <% var repo = repos[i]; %>
-      <% var url = _.shuffle(photo_urls)[0] %>
-      <section class="page1">
-        <div class="page_container">
-          <h1><%= repo.name %></h1>
-          <h2><%= repo.description %></h2>
-          <div class="btns">
-            <a class="reload btn" href=<%= repo.html_url %>>Download on Github</a>
-          </div>
-        </div>
-      </section>
-    <% } %>
-  </script>
-  <script src="Underscore.js"></script>
-  <script type="text/javascript">
-  var photo_urls = [];
-  function get_flickr(){
-    $.getJSON("http://api.flickr.com/services/rest/?method=flickr.interestingness.getList&api_key=e4cc1a48745956f2ee32a816813f7dc9&format=json&nojsoncallback=1",function(res){
-      console.log(res);
-      res.photos.photo.forEach(function(photo){
-        photo_urls.push('http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_s.jpg');
-        
-        // <div  style="background-image: url(<%= url %>); background-size:100%; height: 100%; width: 100%; -webkit-filter: blur(20px)">
-        $('.bg_image').css("background-image", "url(" + _.shuffle(photo_urls)[0] + ")");
-      })
-    });
-  }
-  
-  function get_repos_and_render(){
-    // get a listing of the current available repos and build a section for each
-    $.getJSON("https://api.github.com/users/coreyflynn/repos",function(repos){
-        // Get the template's markup...
-        var tmplMarkup = $('#tmpl-repo').html();
-        // ...tell Underscore to render the template...
-        var compiledTmpl = _.template(tmplMarkup, { repos : repos });
-        // ...and update part of your page:
-        $('#target').html(compiledTmpl);
-        $(".main").onepage_scroll({
-          sectionContainer: "section"
-        });
-    });
-  }
+<!DOCTYPE html><html lang="en"><head><title>Corey Flynn</title><link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"><link rel="stylesheet" href="/public/bower_components/barista/barista.main.min.css"><script src="http://localhost:35729/livereload.js"></script></head><body><div class="container"><div class="row"><div class="col-xs-offset-1 col-xs-2"></div><div class="col-xs-6"><div class="cmap-spacer-large"></div><div class="row"><img src="/public/img/logo.png"></div><div class="row"><h1>Corey Flynn</h1><h3>Developer, analyst, biologist</h3></div><div class="row"><h4 class="pull-left contact-key text-muted">email</h4><h4 class="pull-left contact-value">flynn.corey@gmail.com</h4></div><div class="row"><h4 class="pull-left contact-key text-muted">twitter</h4><h4 class="pull-left contact-value">@CJFlynn</h4></div></div></div><div class="row"><div class="col-xs-offset-1 col-xs-2"><h3>Hi</h3></div><div class="col-xs-6"><p>I am a web developer who also happens to a neuroscientist and
+computational biologist. I'm passionate about empowering folks
+with access to an internet connection to change the world in small
+ways. With a focus on bringing complex datasets and algorithms into
+usable focus, I build things on the web to nudge science forward.</p></div></div><hr><h1 class="text-center">Code</h1><div class="row"><div class="col-xs-offset-1 col-xs-2"><h3>Barista</h3></div><div class="col-xs-6"><p>Barrista.js is a javascript framework for web application development
+tuned to the NIH LINCS dataset (https://commonfund.nih.gov/LINCS/index,
+http://www.lincsproject.org, and lincscloud.org). The components of
+Barista.js are centered around the core structures of Models,
+Collections, and Views derived from Backbone.js. Barista.js supports
+all of the all of the applications developed on apps.lincscloud.org
+and is integrated with data from api.lincscloud.org.</p><p>Barista.js leverages Backbone.js, underscore.js, jquery, handlebars.js
+and bootstrap to provide modern frontend functionality that can be
+configured with HTML data attributes or through javascript. </p><p>Barista.js uses awesome tooling provided by the folks at grunt,
+bower and yeoman
 
-  get_flickr();
-  get_repos_and_render();
-  </script>
-</body>
-</html>
+</p></div></div></div></body><script src="/public/bower_components/barista/barista.main.min.js"></script><script src="/public/main.js"></script></html>

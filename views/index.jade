@@ -1,0 +1,63 @@
+doctype html
+html(lang="en")
+  head
+    title Corey Flynn
+    link(rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css")
+    link(rel='stylesheet', href='/public/bower_components/barista/barista.main.min.css')
+    script(src='http://localhost:35729/livereload.js')
+  body
+    .container
+      //- contact
+      .row
+        .col-xs-offset-1.col-xs-2
+        .col-xs-6
+          .cmap-spacer-large
+          .row
+            img(src='/public/img/logo.png')
+          .row
+            h1 Corey Flynn
+            h3 Developer, analyst, biologist
+          .row
+            h4.pull-left.contact-key.text-muted email
+            h4.pull-left.contact-value flynn.corey@gmail.com
+          .row
+            h4.pull-left.contact-key.text-muted twitter
+            h4.pull-left.contact-value @CJFlynn
+      
+      //- hello
+      .row
+        .col-xs-offset-1.col-xs-2
+          h3 Hi
+        .col-xs-6
+          p. 
+            I am a web developer who also happens to a neuroscientist and 
+            computational biologist. I'm passionate about empowering folks 
+            with access to an internet connection to change the world in small 
+            ways. With a focus on bringing complex datasets and algorithms into 
+            usable focus, I build things on the web to nudge science forward.
+      //- Code
+      hr
+      h1.text-center Code
+      .row
+        .col-xs-offset-1.col-xs-2
+          h3 Barista
+        .col-xs-6
+          p.
+            Barrista.js is a javascript framework for web application development 
+            tuned to the NIH LINCS dataset (https://commonfund.nih.gov/LINCS/index, 
+            http://www.lincsproject.org, and lincscloud.org). The components of 
+            Barista.js are centered around the core structures of Models, 
+            Collections, and Views derived from Backbone.js. Barista.js supports 
+            all of the all of the applications developed on apps.lincscloud.org 
+            and is integrated with data from api.lincscloud.org.
+          p.
+            Barista.js leverages Backbone.js, underscore.js, jquery, handlebars.js 
+            and bootstrap to provide modern frontend functionality that can be 
+            configured with HTML data attributes or through javascript. 
+          p.
+            Barista.js uses awesome tooling provided by the folks at grunt, 
+            bower and yeoman
+        
+
+  script(src='/public/bower_components/barista/barista.main.min.js')
+  script(src='/public/main.js')
